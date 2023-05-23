@@ -1,55 +1,35 @@
+import { useState } from "react"
+import Header from "./components/Header"
+import FeedbackList from './components/FeedbackList'
+import FeedbackData from './data/FeedbackData'
+import FeedbackStats from './data/FeedbackStats'
+
 function App() {
 
-    // JSX elements have to be one parent element
-    // you can use an empty tag
+    const [feedback, setFeedback] = useState
+    (FeedbackData)
 
-    // what is htmlfor used for?
+    const deleteFeedback = (id) => {
 
-    const title = 'Blog Post'
-    const body = 'This is my blog post'
-    const comments = [
+        if(window.confirm("Are you sure you want to delete?")) {
 
-        {id: 1, text: "Comment One"},
-        {id: 2, text: "Comment Two"},
-        {id: 3, text: "Comment Three"}
+            setFeedback(feedback.filter((item) => item.id != id))
 
-    ]
+        }
 
-    // used state
-
-
-    /*
+    }
+    
     return (
-        <div className = "container">
-            <h1>Hello from the app component</h1>
-            <p>I can put this here because I am putting it in a div</p>
-            <label htmlFor = ""></label> 
-        </div>
-    )
-    */
-   return (
-        <div className = "container">
-            <h1>{title.toUpperCase()}</h1>
-            <p>{body}</p>
-
-            <div className = "comments">
-                <h3> Comments ({comments.length})</h3>
-                <ul>
-                
-                    {comments.map((comment, index) => 
-                    
-                        <li key = {index}>{comment.text}</li>
-
-                    )}
-                
-                </ul>
+        <>
+            <Header />
+            <div className="container">
+                <FeedbackList feedback = {feedback}
+                handleDelete />
             </div>
-
-            {Math.random() * (5+5)}
-        </div>
+        
+        </>
     )
-
-
+    
 }
 
 export default App
